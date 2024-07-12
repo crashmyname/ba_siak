@@ -39,7 +39,7 @@
                         })
                     </script>
                     @endif
-                    <form action="" method="post">
+                    <form action="{{route('onlogin')}}" method="post">
                         @csrf
                         <div class="form-group position-relative has-icon-left">
                             <label for="username">Username</label>

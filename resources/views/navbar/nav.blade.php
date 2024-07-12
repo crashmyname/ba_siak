@@ -31,7 +31,7 @@
                 <div class="sidebar-header position-relative">
                     <div class="d-flex justify-content-between align-items-center">
                         <div class="logo">
-                            <a href="index.html"><img src="{{asset('image/fuji.jpg')}}" alt="Logo"
+                            <a href="{{route('dashboard')}}"><img src="{{asset('image/fuji.jpg')}}" alt="Logo"
                                     srcset=""></a>
                         </div>
                         <div class="theme-toggle d-flex gap-2  align-items-center mt-2">
@@ -74,7 +74,7 @@
                         <li class="sidebar-title">Menu</li>
 
                         <li class="sidebar-item  ">
-                            <a href="index.html" class='sidebar-link'>
+                            <a href="{{route('dashboard')}}" class='sidebar-link'>
                                 <i class="bi bi-grid-fill"></i>
                                 <span>Dashboard</span>
                             </a>
@@ -146,8 +146,8 @@
                                 <a href="#" data-bs-toggle="dropdown" aria-expanded="false">
                                     <div class="user-menu d-flex">
                                         <div class="user-name text-end me-3">
-                                            <h6 class="mb-0 text-gray-600">John Ducky</h6>
-                                            <p class="mb-0 text-sm text-gray-600">Administrator</p>
+                                            <h6 class="mb-0 text-gray-600">{{auth()->user()->name}}</h6>
+                                            <p class="mb-0 text-sm text-gray-600">{{auth()->user()->role}}</p>
                                         </div>
                                         <div class="user-img d-flex align-items-center">
                                             <div class="avatar avatar-md">
@@ -175,7 +175,7 @@
                                     </li> --}}
                                     <li><a class="dropdown-item" href="#" id="btnlogout"><i
                                                 class="icon-mid bi bi-box-arrow-left me-2"></i> Logout</a></li>
-                                                <form action="" id="formlogout" method="post">
+                                                <form action="{{route('logout')}}" id="formlogout" method="post">
                                                     @csrf
                                                 </form>
                                 </ul>

@@ -53,6 +53,12 @@ class UserController extends Controller
         return redirect('/');
     }
 
+    public function Dashboard()
+    {
+        $title = "Dashboard";
+        return view('dashboard')->with('title');
+    }
+
     public function user(Request $request)
     {
         $title = 'Data User';
