@@ -4,15 +4,15 @@
         <div class="page-title">
             <div class="row">
                 <div class="col-12 col-md-6 order-md-1 order-last">
-                    <h3>Product Pages</h3>
-                    <p class="text-subtitle text-muted">Data Product</p>
+                    <h3>Surat Keluar Pages</h3>
+                    <p class="text-subtitle text-muted">Data Surat Keluar</p>
                 </div>
                 <div class="col-12 col-md-6 order-md-2 order-first">
                     <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="">Dashboard</a>
                             </li>
-                            <li class="breadcrumb-item active" aria-current="page">Data Product
+                            <li class="breadcrumb-item active" aria-current="page">Data Surat Keluar
                             </li>
                         </ol>
                     </nav>
@@ -22,10 +22,10 @@
         <section class="section">
             <div class="card">
                 <div class="card-header">
-                    <h4 class="card-title">Product Content</h4>
+                    <h4 class="card-title">Surat Keluar Content</h4>
                 </div>
                 <div class="card-body">
-                    <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#primary" title="Add Product">
+                    <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#primary" title="Add Surat Keluar">
                         <i class="bi bi-person-plus"></i>
                     </button>
                     <!--primary theme Modal -->
@@ -34,7 +34,7 @@
                         <div class="modal-dialog modal-dialog modal-dialog-scrollable modal-lg" role="document">
                             <div class="modal-content">
                                 <div class="modal-header bg-primary">
-                                    <h5 class="modal-title white" id="myModalLabel160">Modal Product
+                                    <h5 class="modal-title white" id="myModalLabel160">Modal Surat Keluar
                                     </h5>
                                     <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                                         <i data-feather="x"></i>
@@ -44,46 +44,58 @@
                                     <div class="col-md-12 col-12">
                                         <div class="card">
                                             <div class="card-header">
-                                                <h4 class="card-title">Form Add Product</h4>
+                                                <h4 class="card-title">Form Add Surat Keluar</h4>
                                             </div>
                                             <div class="card-content">
                                                 <div class="card-body">
-                                                    <form class="form form-horizontal" id="formaddproduct" action="/addproduct"
+                                                    <form class="form form-horizontal" id="formaddsuratkeluar" action="/addsuratkeluar"
                                                         method="POST" enctype="multipart/form-data">
                                                         @csrf
                                                         <div class="form-body">
                                                             <div class="row">
                                                                 <div class="col-md-4">
-                                                                    <label>Nama Supplier</label>
+                                                                    <label>No Surat Keluar</label>
                                                                 </div>
                                                                 <div class="col-md-8 form-group">
-                                                                    <input type="text" name="nama_supplier" id="nama_supplier"
+                                                                    <input type="text" name="no_suratkeluar" id="no_suratkeluar"
                                                                         class="form-control">
                                                                 </div>
                                                                 <div class="col-md-4">
-                                                                    <label>Kode Product</label>
+                                                                    <label>Tanggal Terima</label>
                                                                 </div>
                                                                 <div class="col-md-8 form-group">
-                                                                    <input type="text" name="kode_product" id="kode_product" class="form-control" required>
+                                                                    <input type="date" name="tgl_terima" id="tgl_terima" class="form-control" required>
                                                                 </div>
                                                                 <div class="col-md-4">
-                                                                    <label>Nama Product</label>
+                                                                    <label>Tanggal Pembuatan</label>
                                                                 </div>
                                                                 <div class="col-md-8 form-group">
-                                                                    <input type="text" class="form-control"
-                                                                        name="nama_product" id="nama_product">
+                                                                    <input type="date" class="form-control"
+                                                                        name="tgl_pembuatan" id="tgl_pembuatan">
                                                                 </div>
                                                                 <div class="col-md-4">
-                                                                    <label>Jumlah</label>
+                                                                    <label>No PO</label>
                                                                 </div>
                                                                 <div class="col-md-8 form-group">
-                                                                    <input type="number" name="jumlah" id="jumlah" class="form-control">
+                                                                    <input type="text" name="no_po" id="no_po" class="form-control">
                                                                 </div>
                                                                 <div class="col-md-4">
-                                                                    <label>Satuan</label>
+                                                                    <label>No Invoice</label>
                                                                 </div>
                                                                 <div class="col-md-8 form-group">
-                                                                    <input type="text" name="satuan" id="satuan" class="form-control">
+                                                                    <input type="text" name="no_invoice" id="no_invoice" class="form-control">
+                                                                </div>
+                                                                <div class="col-md-4">
+                                                                    <label>No Faktur</label>
+                                                                </div>
+                                                                <div class="col-md-8 form-group">
+                                                                    <input type="text" name="no_faktur" id="no_faktur" class="form-control">
+                                                                </div>
+                                                                <div class="col-md-4">
+                                                                    <label>Nominal</label>
+                                                                </div>
+                                                                <div class="col-md-8 form-group">
+                                                                    <input type="text" name="nominal" id="nominal" class="form-control">
                                                                 </div>
                                                                 <div class="col-md-4">
                                                                     <label>Keterangan</label>
@@ -115,8 +127,8 @@
                             </div>
                         </div>
                     </div>
-                    <button type="button" class="btn btn-outline-warning" id="modalupproduct" data-bs-toggle="modal"
-                        data-bs-target="#warning" title="Update Product">
+                    <button type="button" class="btn btn-outline-warning" id="modalupsuratkeluar" data-bs-toggle="modal"
+                        data-bs-target="#warning" title="Update Surat Keluar">
                         <i class="bi bi-pencil-square"></i>
                     </button>
                     <!--primary theme Modal -->
@@ -125,7 +137,7 @@
                         <div class="modal-dialog modal-dialog modal-dialog-scrollable modal-lg" role="document">
                             <div class="modal-content">
                                 <div class="modal-header bg-warning">
-                                    <h5 class="modal-title white" id="myModalLabel160">Modal Product
+                                    <h5 class="modal-title white" id="myModalLabel160">Modal Surat Keluar
                                     </h5>
                                     <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                                         <i data-feather="x"></i>
@@ -135,46 +147,58 @@
                                     <div class="col-md-12 col-12">
                                         <div class="card">
                                             <div class="card-header">
-                                                <h4 class="card-title">Form Update Product</h4>
+                                                <h4 class="card-title">Form Update Surat Keluar</h4>
                                             </div>
                                             <div class="card-content">
                                                 <div class="card-body">
-                                                    <form class="form form-horizontal" id="formupdateproduct" action=""
+                                                    <form class="form form-horizontal" id="formupdatesuratkeluar" action=""
                                                         method="POST" enctype="multipart/form-data">
                                                         @csrf
                                                         <div class="form-body">
                                                             <div class="row">
                                                                 <div class="col-md-4">
-                                                                    <label>Nama Supplier</label>
+                                                                    <label>No Surat Keluar</label>
                                                                 </div>
                                                                 <div class="col-md-8 form-group">
-                                                                    <input type="text" name="nama_supplier" id="upnama_supplier"
+                                                                    <input type="text" name="no_suratkeluar" id="upno_suratkeluar"
                                                                         class="form-control">
                                                                 </div>
                                                                 <div class="col-md-4">
-                                                                    <label>Kode Product</label>
+                                                                    <label>Tanggal Terima</label>
                                                                 </div>
                                                                 <div class="col-md-8 form-group">
-                                                                    <input type="text" name="kode_product" id="upkode_product" class="form-control" required>
+                                                                    <input type="date" name="tgl_terima" id="uptgl_terima" class="form-control" required>
                                                                 </div>
                                                                 <div class="col-md-4">
-                                                                    <label>Nama Product</label>
+                                                                    <label>Tanggal Pembuatan</label>
                                                                 </div>
                                                                 <div class="col-md-8 form-group">
-                                                                    <input type="text" class="form-control"
-                                                                        name="nama_product" id="upnama_product">
+                                                                    <input type="date" class="form-control"
+                                                                        name="tgl_pembuatan" id="uptgl_pembuatan">
                                                                 </div>
                                                                 <div class="col-md-4">
-                                                                    <label>Jumlah</label>
+                                                                    <label>No PO</label>
                                                                 </div>
                                                                 <div class="col-md-8 form-group">
-                                                                    <input type="number" name="jumlah" id="upjumlah" class="form-control">
+                                                                    <input type="text" name="no_po" id="upno_po" class="form-control">
                                                                 </div>
                                                                 <div class="col-md-4">
-                                                                    <label>Satuan</label>
+                                                                    <label>No Invoice</label>
                                                                 </div>
                                                                 <div class="col-md-8 form-group">
-                                                                    <input type="text" name="satuan" id="upsatuan" class="form-control">
+                                                                    <input type="text" name="no_invoice" id="upno_invoice" class="form-control">
+                                                                </div>
+                                                                <div class="col-md-4">
+                                                                    <label>No Faktur</label>
+                                                                </div>
+                                                                <div class="col-md-8 form-group">
+                                                                    <input type="text" name="no_faktur" id="upno_faktur" class="form-control">
+                                                                </div>
+                                                                <div class="col-md-4">
+                                                                    <label>Nominal</label>
+                                                                </div>
+                                                                <div class="col-md-8 form-group">
+                                                                    <input type="text" name="nominal" id="upnominal" class="form-control">
                                                                 </div>
                                                                 <div class="col-md-4">
                                                                     <label>Keterangan</label>
@@ -206,7 +230,7 @@
                             </div>
                         </div>
                     </div>
-                    <button type="submit" class="btn btn-outline-danger" id="deleteproduct" title="Delete Product"><i class="bi bi-trash"></i>
+                    <button type="submit" class="btn btn-outline-danger" id="deletesuratkeluar" title="Delete Surat Keluar"><i class="bi bi-trash"></i>
                     </button>
                 </div>
                 <div class="container">
@@ -214,11 +238,13 @@
                         <thead>
                             <tr>
                                 <th>No</th>
-                                <th>Nama Supplier</th>
-                                <th>Kode Product</th>
-                                <th>Nama Product</th>
-                                <th>Jumlah</th>
-                                <th>Satuan</th>
+                                <th>No Surat Keluar</th>
+                                <th>Tanggal terima</th>
+                                <th>Tanggal Pembuatan</th>
+                                <th>No Po</th>
+                                <th>No Invoice</th>
+                                <th>No Faktur</th>
+                                <th>Nominal</th>
                                 <th>Keterangan</th>
                             </tr>
                         </thead>
@@ -237,33 +263,41 @@
                 serverSide: true,
                 responsive: true,
                 select: true,
-                ajax: '{{ route('product') }}',
+                ajax: '{{ route('suratkeluar') }}',
                 columns: [{
-                        data: 'product_id',
-                        name: 'product_id',
+                        data: 'suratkeluar_id',
+                        name: 'suratkeluar_id',
                         render: function(data, type, row, meta) {
                             return meta.row + meta.settings._iDisplayStart + 1;
                         }
                     },
                     {
-                        data: 'nama_supplier',
-                        name: 'nama_supplier',
+                        data: 'no_suratkeluar',
+                        name: 'no_suratkeluar',
                     },
                     {
-                        data: 'kode_product',
-                        name: 'kode_product',
+                        data: 'tgl_terima',
+                        name: 'tgl_terima',
                     },
                     {
-                        data: 'nama_product',
-                        name: 'nama_product',
+                        data: 'tgl_pembuatan',
+                        name: 'tgl_pembuatan',
                     },
                     {
-                        data: 'jumlah',
-                        name: 'jumlah',
+                        data: 'no_po',
+                        name: 'no_po',
                     },
                     {
-                        data: 'satuan',
-                        name: 'satuan',
+                        data: 'no_invoice',
+                        name: 'no_invoice',
+                    },
+                    {
+                        data: 'no_faktur',
+                        name: 'no_faktur',
+                    },
+                    {
+                        data: 'nominal',
+                        name: 'nominal',
                     },
                     {
                         data: 'keterangan',
@@ -346,8 +380,8 @@
             }
             $('#add').on('click', function(e) {
                 e.preventDefault();
-                var url = "{{ route('addproduct') }}";
-                var formData = new FormData($('#formaddproduct')[0]);
+                var url = "{{ route('addsuratkeluar') }}";
+                var formData = new FormData($('#formaddsuratkeluar')[0]);
                 var csrfToken = $('meta[name="csrf-token"]').attr('content');
                 $.ajax({
                     type: 'POST',
@@ -365,14 +399,14 @@
                             Swal.fire({
                                 title: 'Success',
                                 icon: 'success',
-                                text: 'Product berhasil ditambah',
+                                text: 'Surat Keluar berhasil ditambah',
                             });
                             reloadData();
                         } else {
                             Swal.fire({
                                 title: 'Error',
                                 icon: 'error',
-                                text: 'Gagal membuat Product',
+                                text: 'Gagal membuat Surat Keluar',
                             })
                         }
                     },
@@ -386,23 +420,27 @@
                     }
                 })
             })
-            $('#modalupproduct').on('click', function(e) {
+            $('#modalupsuratkeluar').on('click', function(e) {
                 var selected = dataTable.rows({
                     selected: true
                 }).data();
                 console.log(selected);
-                var nama_supplier = $('#upnama_supplier');
-                var kode_product = $('#upkode_product');
-                var nama_product = $('#upnama_product');
-                var jumlah = $('#upjumlah');
-                var satuan = $('#upsatuan');
+                var no_suratKeluar = $('#upno_suratkeluar');
+                var tgl_terima = $('#uptgl_terima');
+                var tgl_pembuatan = $('#uptgl_pembuatan');
+                var no_po = $('#upno_po');
+                var no_invoice = $('#upno_invoice');
+                var no_faktur = $('#upno_faktur');
+                var nominal = $('#upnominal');
                 var keterangan = $('#upketerangan');
                 if (selected.length > 0) {
-                    nama_supplier.val(selected[0].nama_supplier);
-                    kode_product.val(selected[0].kode_product);
-                    nama_product.val(selected[0].nama_product);
-                    jumlah.val(selected[0].jumlah);
-                    satuan.val(selected[0].satuan);
+                    no_suratKeluar.val(selected[0].no_suratkeluar);
+                    tgl_terima.val(selected[0].tgl_terima);
+                    tgl_pembuatan.val(selected[0].tgl_pembuatan);
+                    no_po.val(selected[0].no_po);
+                    no_invoice.val(selected[0].no_invoice);
+                    no_faktur.val(selected[0].no_faktur);
+                    nominal.val(selected[0].nominal);
                     keterangan.val(selected[0].keterangan);
                     $('#modalwarning').modal('show');
                 } else {
@@ -430,10 +468,10 @@
                     return;
                 }
                 var row = selected[0];
-                var pID = row.product_id;
-                var updateProduct = "{{ url('/product/') }}" + '/' + pID;
-                var formID = '#formupdateproduct';
-                console.log(pID);
+                var sID = row.suratkeluar_id;
+                var updateSuratKeluar = "{{ url('/suratkeluar/') }}" + '/' + sID;
+                var formID = '#formupdatesuratkeluar';
+                console.log(sID);
                 Swal.fire({
                     title: 'Update',
                     icon: 'warning',
@@ -442,15 +480,15 @@
                     confirmButtonText: 'Yes, Update!!',
                 }).then((result) => {
                     if (result.isConfirmed) {
-                        var formUpProduct = new FormData($(formID)[0]);
-                        for (var pair of formUpProduct.entries()) {
+                        var formUpSuratKeluar = new FormData($(formID)[0]);
+                        for (var pair of formUpSuratKeluar.entries()) {
                             console.log(pair[0] + ': ' + pair[1]);
                         }
 
                         $.ajax({
                             type: 'POST',
-                            url: updateProduct,
-                            data: formUpProduct,
+                            url: updateSuratKeluar,
+                            data: formUpSuratKeluar,
                             contentType: false,
                             processData: false,
                             headers: {
@@ -495,7 +533,7 @@
                     }
                 })
             })
-            $('#deleteproduct').on('click', function(e) {
+            $('#deletesuratkeluar').on('click', function(e) {
                 var select = dataTable.rows({
                     selected: true
                 }).data();
@@ -511,10 +549,10 @@
                     }).then((result) => {
                         if (result.isConfirmed) {
                             select.each(function(data) {
-                                const pID = data.product_id;
+                                const sID = data.suratkeluar_id;
                                 $.ajax({
                                     type: 'DELETE',
-                                    url: "{{ url('/product') }}" + '/' + pID,
+                                    url: "{{ url('/suratkeluar') }}" + '/' + sID,
                                     data: {
                                         _token: '{{ csrf_token() }}',
                                     },

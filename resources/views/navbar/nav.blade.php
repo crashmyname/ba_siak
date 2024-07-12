@@ -90,18 +90,18 @@
                                     <a href="{{route('user')}}">Data User</a>
                                 </li>
                                 <li class="submenu-item ">
-                                    <a href="component-badge.html">Data Product</a>
+                                    <a href="{{route('product')}}">Data Product</a>
                                 </li>
                             </ul>
                         </li>
                         <li class="sidebar-item  ">
-                            <a href="index.html" class='sidebar-link'>
+                            <a href="{{route('suratmasuk')}}" class='sidebar-link'>
                                 <i class="bi bi-grid-fill"></i>
                                 <span>Surat Masuk</span>
                             </a>
                         </li>
                         <li class="sidebar-item  ">
-                            <a href="index.html" class='sidebar-link'>
+                            <a href="{{route('suratkeluar')}}" class='sidebar-link'>
                                 <i class="bi bi-grid-fill"></i>
                                 <span>Surat Keluar</span>
                             </a>
