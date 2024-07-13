@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\SuratMasuk;
+use App\Models\SuratKeluar;
+use App\Models\Product;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
@@ -56,7 +59,11 @@ class UserController extends Controller
     public function Dashboard()
     {
         $title = "Dashboard";
-        return view('dashboard')->with('title');
+        $product = Product::all();
+        $suratmasuk = SuratMasuk::all();
+        $suratkeluar = SuratKeluar::all();
+        $user = User::all();
+        return view('dashboard',compact('title','user','suratmasuk','suratkeluar','product'));
     }
 
     public function user(Request $request)

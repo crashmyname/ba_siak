@@ -18,6 +18,7 @@ use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
 use Illuminate\Support\Str;
 use Carbon\Carbon;
+use setasign\Fpdi\Fpdi;
 
 class SuratMController extends Controller
 {
@@ -94,5 +95,44 @@ class SuratMController extends Controller
         $suratmasuk = SuratMasuk::find($id);
         $suratmasuk->delete();
         return response()->json(['status' => 200]);
+    }
+
+    public function reportSuratMasuk()
+    {
+        return view('suratmasuk.reportsuratmasuk');
+    }
+
+    public function pdfSuratMasuk(Request $request, $id)
+    {
+        $file = public_path('pdf/suratjalan.pdf');
+        $suratmasuk = SuratMasuk::find($id);
+        $product = Product::where('product_id',$suratmasuk->product_id)->first();
+        $folderpath = public_path('/pdf/suratjalan/'.$id);
+        if(!file_exists($folderpath)){
+            mkdir($folderpath, 0777, true);
+        }
+        $namafile = $suratmasuk->no_suratmasuk." | ". $suratmasuk->tgl_pembuatan;
+        $combine = $folderpath."/".$namafile.".pdf";
+        $fpdi = new FPDI;
+        $source = $fpdi->setSourceFile($file);
+        $fpdi->SetTitle($namafile);
+        for($i = 1; $i<=$source;$i++){
+            $template = $fpdi->importPage($i);
+            $size = $fpdi->getTempateSize($template);
+            $fpdi->AddPage($size['orientation'], array($size['width'], $size['height']));
+            $fpdi->useTemplate($template);
+            $fpdi->SetFont('Arial', "",12);
+            $fpdi->SetTextColor(0,0,0);
+            $fpdi->Text(20,10,$suratmasuk->no_suratmasuk);
+            $fpdi->Text(20,15,$suratmasuk->no_faktur);
+            $fpdi->Text(20,18,$suratmasuk->no_po);
+            $fpdi->Text(30,18,$suratmasuk->no_invoice);
+            $fpdi->Text(30,20,$suratmasuk->tgl_terima);
+            $fpdi->Text(30,23,$suratmasuk->tgl_pembuatan);
+            $fpdi->Text(40,13,$product->nama_product);
+            $fpdi->Text(40,15,$suratmasuk->nominal);
+            $fpdi->Text(45,15,$suratmasuk->keterangan);
+        }
+        return $fpdi->Output($combine, 'I');
     }
 }

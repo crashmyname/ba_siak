@@ -20,7 +20,7 @@
                                 <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7">
                                     <a href="">
                                     <h6 class="text-muted font-semibold">Data User</h6>
-                                    <h6 class="font-extrabold mb-0"></h6>
+                                    <h6 class="font-extrabold mb-0">{{$user->count()}}</h6>
                                     </a>
                                 </div>
                             </div>
@@ -39,7 +39,7 @@
                                 </div>
                                 <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7">
                                     <h6 class="text-muted font-semibold">Data Product</h6>
-                                    <h6 class="font-extrabold mb-0"></h6>
+                                    <h6 class="font-extrabold mb-0">{{$product->count()}}</h6>
                                 </div>
                             </div>
                         </div>
@@ -57,7 +57,7 @@
                                 </div>
                                 <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7">
                                     <h6 class="text-muted font-semibold">Surat Masuk</h6>
-                                    <h6 class="font-extrabold mb-0"></h6>
+                                    <h6 class="font-extrabold mb-0">{{$suratmasuk->count()}}</h6>
                                 </div>
                             </div>
                         </div>
@@ -74,8 +74,8 @@
                                     </div>
                                 </div>
                                 <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7">
-                                    <h6 class="text-muted font-semibold">Keluar</h6>
-                                    <h6 class="font-extrabold mb-0"></h6>
+                                    <h6 class="text-muted font-semibold">Surat Keluar</h6>
+                                    <h6 class="font-extrabold mb-0">{{$suratkeluar->count()}}</h6>
                                 </div>
                             </div>
                         </div>

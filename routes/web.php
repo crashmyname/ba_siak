@@ -40,9 +40,13 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/suratmasuk',[SuratMController::class, 'addSuratmasuk'])->name('addsuratmasuk');
     Route::post('/suratmasuk/{id}',[SuratMController::class, 'updateSuratmasuk'])->name('updatesuratmasuk');
     Route::delete('/suratmasuk/{id}',[SuratMController::class, 'deleteSuratmasuk'])->name('deletesuratmasuk');
+    Route::get('/reportsuratmasuk',[SuratMController::class, 'reportSuratMasuk'])->name('reportsuratmasuk');
+    Route::get('/reportsuratmasuk/{id}',[SuratMController::class, 'pdfSuratMasuk'])->name('pdfsuratmasuk');
     // Surat Keluar
     Route::get('/suratkeluar',[SuratKController::class, 'suratkeluar'])->name('suratkeluar');
     Route::post('/suratkeluar',[SuratKController::class, 'addSuratkeluar'])->name('addsuratkeluar');
     Route::post('/suratkeluar/{id}',[SuratKController::class, 'updateSuratkeluar'])->name('updatesuratkeluar');
     Route::delete('/suratkeluar/{id}',[SuratKController::class, 'deleteSuratkeluar'])->name('deletesuratkeluar');
+    Route::get('/reportsuratkeluar',[SuratKController::class, 'reportSuratKeluar'])->name('reportsuratkeluar');
+    Route::get('/reportsuratkeluar/{id}',[SuratKController::class, 'pdfSuratKeluar'])->name('pdfsuratkeluar');
 });

@@ -17,6 +17,7 @@ use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
 use Illuminate\Support\Str;
 use Carbon\Carbon;
+use setasign\Fpdi\Fpdi;
 
 class SuratKController extends Controller
 {
@@ -84,5 +85,44 @@ class SuratKController extends Controller
         $suratkeluar = SuratKeluar::find($id);
         $suratkeluar->delete();
         return response()->json(['status' => 200]);
+    }
+
+    public function reportSuratKeluar()
+    {
+        return view('suratkeluar.reportsuratkeluar');
+    }
+
+    public function pdfSuratKeluar(Request $request, $id)
+    {
+        $file = public_path('pdf/suratjalan.pdf');
+        $suratkeluar = SuratKeluar::find($id);
+        $product = Product::where('product_id',$suratkeluar->product_id)->first();
+        $folderpath = public_path('/pdf/suratjalan/'.$id);
+        if(!file_exists($folderpath)){
+            mkdir($folderpath, 0777, true);
+        }
+        $namafile = $suratkeluar->no_suratkeluar." | ". $suratkeluar->tgl_pembuatan;
+        $combine = $folderpath."/".$namafile.".pdf";
+        $fpdi = new FPDI;
+        $source = $fpdi->setSourceFile($file);
+        $fpdi->SetTitle($namafile);
+        for($i = 1; $i<=$source;$i++){
+            $template = $fpdi->importPage($i);
+            $size = $fpdi->getTempateSize($template);
+            $fpdi->AddPage($size['orientation'], array($size['width'], $size['height']));
+            $fpdi->useTemplate($template);
+            $fpdi->SetFont('Arial', "",12);
+            $fpdi->SetTextColor(0,0,0);
+            $fpdi->Text(20,10,$suratkeluar->no_suratkeluar);
+            $fpdi->Text(20,15,$suratkeluar->no_faktur);
+            $fpdi->Text(20,18,$suratkeluar->no_po);
+            $fpdi->Text(30,18,$suratkeluar->no_invoice);
+            $fpdi->Text(30,20,$suratkeluar->tgl_terima);
+            $fpdi->Text(30,23,$suratkeluar->tgl_pembuatan);
+            $fpdi->Text(40,13,$product->nama_product);
+            $fpdi->Text(40,15,$suratkeluar->nominal);
+            $fpdi->Text(45,15,$suratkeluar->keterangan);
+        }
+        return $fpdi->Output($combine, 'I');
     }
 }

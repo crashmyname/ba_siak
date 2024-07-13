@@ -113,10 +113,10 @@
                             </a>
                             <ul class="submenu ">
                                 <li class="submenu-item ">
-                                    <a href="component-alert.html">Report Surat Masuk</a>
+                                    <a href="{{route('reportsuratmasuk')}}">Report Surat Masuk</a>
                                 </li>
                                 <li class="submenu-item ">
-                                    <a href="component-badge.html">Report Surat Keluar</a>
+                                    <a href="{{route('reportsuratkeluar')}}">Report Surat Keluar</a>
                                 </li>
                             </ul>
                         </li>
@@ -151,7 +151,11 @@
                                         </div>
                                         <div class="user-img d-flex align-items-center">
                                             <div class="avatar avatar-md">
+                                                @if (auth()->user()->profile == 'default_profil.png' || auth()->user()->profile == null || auth()->user()->profile == '')
                                                 <img src="template/assets/images/faces/1.jpg">
+                                                @else
+                                                <img src="{{asset('storage/profil/'.auth()->user()->profile)}}">
+                                                @endif
                                             </div>
                                         </div>
                                     </div>
@@ -159,7 +163,7 @@
                                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton"
                                     style="min-width: 11rem;">
                                     <li>
-                                        <h6 class="dropdown-header">Hello, John!</h6>
+                                        <h6 class="dropdown-header">Hello, {{auth()->user()->name}}</h6>
                                     </li>
                                     {{-- <li><a class="dropdown-item" href="#"><i
                                                 class="icon-mid bi bi-person me-2"></i> My
