@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sign in - Training Apps Stanley</title>
+    <title>Sign in - BA SIAK FUJI</title>
     <link rel="stylesheet" href="{{asset('voler/dist/assets/css/bootstrap.css')}}">
     
     <link rel="shortcut icon" href="{{asset('img/ise.png')}}" type="image/x-icon">
