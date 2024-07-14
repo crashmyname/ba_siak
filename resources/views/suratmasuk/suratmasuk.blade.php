@@ -103,10 +103,22 @@
                                                                     <input type="text" name="no_faktur" id="no_faktur" class="form-control">
                                                                 </div>
                                                                 <div class="col-md-4">
-                                                                    <label>Nominal</label>
+                                                                    <label>Jumlah</label>
+                                                                </div>
+                                                                <div class="col-md-8 form-group">
+                                                                    <input type="number" name="quantity" id="quantity" class="form-control">
+                                                                </div>
+                                                                <div class="col-md-4">
+                                                                    <label>Harga</label>
                                                                 </div>
                                                                 <div class="col-md-8 form-group">
                                                                     <input type="text" name="nominal" id="nominal" class="form-control">
+                                                                </div>
+                                                                <div class="col-md-4">
+                                                                    <label>Upload Berkas PDF</label>
+                                                                </div>
+                                                                <div class="col-md-8 form-group">
+                                                                    <input type="file" name="berkas" id="berkas" class="form-control">
                                                                 </div>
                                                                 <div class="col-md-4">
                                                                     <label>Keterangan</label>
@@ -217,16 +229,29 @@
                                                                     <input type="text" name="no_faktur" id="upno_faktur" class="form-control">
                                                                 </div>
                                                                 <div class="col-md-4">
-                                                                    <label>Nominal</label>
+                                                                    <label>Jumlah</label>
+                                                                </div>
+                                                                <div class="col-md-8 form-group">
+                                                                    <input type="number" name="quantity" id="upquantity" class="form-control">
+                                                                </div>
+                                                                <div class="col-md-4">
+                                                                    <label>Harga</label>
                                                                 </div>
                                                                 <div class="col-md-8 form-group">
                                                                     <input type="text" name="nominal" id="upnominal" class="form-control">
                                                                 </div>
                                                                 <div class="col-md-4">
+                                                                    <label>Berkas</label>
+                                                                </div>
+                                                                <div class="col-md-8 form-group">
+                                                                    <input type="file" name="berkas" class="form-control" id="upberkas" class="form-control">
+                                                                    <iframe src="" width="100%" id="pdfViewer" height="500px" frameborder="0"></iframe>
+                                                                </div>
+                                                                <div class="col-md-4">
                                                                     <label>Keterangan</label>
                                                                 </div>
                                                                 <div class="col-md-8 form-group">
-                                                                    <textarea name="keterangan" id="upketerangan" cols="10" rows="2"></textarea>
+                                                                    <textarea name="keterangan" id="upketerangan" class="form-control" cols="10" rows="2"></textarea>
                                                                 </div>
                                                                 <div class="col-sm-12 d-flex justify-content-end">
                                                                     <button type="submit"
@@ -269,6 +294,7 @@
                                 <th>No Invoice</th>
                                 <th>No Faktur</th>
                                 <th>Nominal</th>
+                                <th>Berkas</th>
                                 <th>Keterangan</th>
                             </tr>
                         </thead>
@@ -330,6 +356,10 @@
                     {
                         data: 'nominal',
                         name: 'nominal',
+                    },
+                    {
+                        data: 'berkas',
+                        name: 'berkas',
                     },
                     {
                         data: 'keterangan',
@@ -465,7 +495,9 @@
                 var nama_supplier = $('#upnama_supplier');
                 var no_invoice = $('#upno_invoice');
                 var no_faktur = $('#upno_faktur');
+                var quantity = $('#upquantity');
                 var nominal = $('#upnominal');
+                var berkas = $('#pdfViewer');
                 var keterangan = $('#upketerangan');
                 if (selected.length > 0) {
                     no_suratmasuk.val(selected[0].no_suratmasuk);
@@ -476,7 +508,9 @@
                     nama_supplier.val(selected[0].nama_supplier);
                     no_invoice.val(selected[0].no_invoice);
                     no_faktur.val(selected[0].no_faktur);
+                    quantity.val(selected[0].quantity);
                     nominal.val(selected[0].nominal);
+                    berkas.attr('src','storage/berkas/'+selected[0].berkas);
                     keterangan.val(selected[0].keterangan);
                     $('#modalwarning').modal('show');
                 } else {

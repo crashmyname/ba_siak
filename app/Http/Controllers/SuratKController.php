@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\SuratKeluar;
+use App\Models\Product;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
@@ -94,10 +95,10 @@ class SuratKController extends Controller
 
     public function pdfSuratKeluar(Request $request, $id)
     {
-        $file = public_path('pdf/suratjalan.pdf');
+        $file = public_path('pdf/suratkeluar.pdf');
         $suratkeluar = SuratKeluar::find($id);
         $product = Product::where('product_id',$suratkeluar->product_id)->first();
-        $folderpath = public_path('/pdf/suratjalan/'.$id);
+        $folderpath = public_path('/pdf/suratkeluar/'.$id);
         if(!file_exists($folderpath)){
             mkdir($folderpath, 0777, true);
         }
@@ -108,20 +109,20 @@ class SuratKController extends Controller
         $fpdi->SetTitle($namafile);
         for($i = 1; $i<=$source;$i++){
             $template = $fpdi->importPage($i);
-            $size = $fpdi->getTempateSize($template);
+            $size = $fpdi->getTemplateSize($template);
             $fpdi->AddPage($size['orientation'], array($size['width'], $size['height']));
             $fpdi->useTemplate($template);
             $fpdi->SetFont('Arial', "",12);
             $fpdi->SetTextColor(0,0,0);
-            $fpdi->Text(20,10,$suratkeluar->no_suratkeluar);
-            $fpdi->Text(20,15,$suratkeluar->no_faktur);
-            $fpdi->Text(20,18,$suratkeluar->no_po);
-            $fpdi->Text(30,18,$suratkeluar->no_invoice);
-            $fpdi->Text(30,20,$suratkeluar->tgl_terima);
-            $fpdi->Text(30,23,$suratkeluar->tgl_pembuatan);
-            $fpdi->Text(40,13,$product->nama_product);
-            $fpdi->Text(40,15,$suratkeluar->nominal);
-            $fpdi->Text(45,15,$suratkeluar->keterangan);
+            $fpdi->Text(46,69.6,$suratkeluar->no_suratkeluar);
+            $fpdi->Text(45.7,76.2,$suratkeluar->no_faktur);
+            $fpdi->Text(46,83,$suratkeluar->no_po);
+            $fpdi->Text(160,69.6,$suratkeluar->no_invoice);
+            $fpdi->Text(160,76.2,Carbon::parse($suratkeluar->tgl_terima)->format('d-m-Y'));
+            $fpdi->Text(160,83,Carbon::parse($suratkeluar->tgl_pembuatan)->format('d-m-Y'));
+            // $fpdi->Text(15,118,$product->nama_product);
+            // $fpdi->Text(139,118,$suratkeluar->nominal);
+            // $fpdi->Text(175,118,$suratkeluar->keterangan);
         }
         return $fpdi->Output($combine, 'I');
     }
