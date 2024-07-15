@@ -1,0 +1,11 @@
+[build]
+  command = "composer install" # sesuaikan dengan command build Anda
+
+[context.production.environment]
+  PHP_VERSION = "8.1" # Ganti versi PHP sesuai kebutuhan (misalnya "7.4" atau versi yang diperlukan)
+
+[context.deploy-preview.environment]
+  PHP_VERSION = "8.1" # Konfigurasi untuk deploy preview environment jika diperlukan
+
+[context.branch-deploy.environment]
+  PHP_VERSION = "8.1" # Konfigurasi untuk branch deploy environment jika diperlukan
