@@ -1,5 +1,6 @@
 [build]
   command = "composer install && php artisan build"
+  publish = "/opt/build/repo/dist"
 
 [context.production.environment]
   PHP_VERSION = "8.1"
