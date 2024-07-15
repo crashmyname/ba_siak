@@ -1,5 +1,5 @@
 [build]
-  command = "composer install && php artisan build" # Sesuaikan dengan perintah build Laravel Anda
+  command = "composer install && php artisan build"
 
 [context.production.environment]
   PHP_VERSION = "8.1"
@@ -12,8 +12,6 @@
 
 [build.environment]
   COMPOSER_FLAGS = "--optimize-autoloader --no-dev"
-
-[build.environment]
   NPM_FLAGS = "--production --no-optional"
 
-publish = "public" # Ubah menjadi folder publik Laravel yang sesuai
+publish = "public"
