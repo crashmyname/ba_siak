@@ -1,5 +1,5 @@
 [build]
-  command = "composer install && php artisan build"
+  command = "composer install"
   publish = "dist/"
 
 [context.production.environment]
