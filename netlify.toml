@@ -1,11 +1,19 @@
 [build]
-  command = "composer install" # sesuaikan dengan command build Anda
+  command = "composer install && php artisan build" # Sesuaikan dengan perintah build Laravel Anda
 
 [context.production.environment]
-  PHP_VERSION = "8.1" # Ganti versi PHP sesuai kebutuhan (misalnya "7.4" atau versi yang diperlukan)
+  PHP_VERSION = "8.1"
 
 [context.deploy-preview.environment]
-  PHP_VERSION = "8.1" # Konfigurasi untuk deploy preview environment jika diperlukan
+  PHP_VERSION = "8.1"
 
 [context.branch-deploy.environment]
-  PHP_VERSION = "8.1" # Konfigurasi untuk branch deploy environment jika diperlukan
+  PHP_VERSION = "8.1"
+
+[build.environment]
+  COMPOSER_FLAGS = "--optimize-autoloader --no-dev"
+
+[build.environment]
+  NPM_FLAGS = "--production --no-optional"
+
+publish = "public" # Ubah menjadi folder publik Laravel yang sesuai
