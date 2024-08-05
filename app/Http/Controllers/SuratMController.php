@@ -120,6 +120,18 @@ class SuratMController extends Controller
         return view('suratmasuk.reportsuratmasuk');
     }
 
+    public function detailProduct(Request $request,$id)
+    {
+        $suratmasuk = SuratMasuk::find($id);
+        if($request->ajax()){
+            $dproduct = DetailProduct::leftJoin('product','detailproduct.product_id','=','product.product_id')
+            ->where('suratmasuk_id',$id)
+            ->get();
+            return DataTables::of($dproduct)
+            ->make(true);
+        }
+    }
+
     public function pdfSuratMasuk(Request $request, $id)
     {
         $file = public_path('pdf/suratjalan.pdf');

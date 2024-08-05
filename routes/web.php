@@ -38,6 +38,7 @@ Route::middleware(['auth'])->group(function () {
     Route::delete('/product/{id}',[ProductController::class, 'deleteProduct'])->name('deleteproduct');
     // Detail Product
     Route::get('/dproduct/{id}',[DetailProductController::class, 'detailproduct'])->name('dproduct');
+    Route::get('/dproducts/{id}',[SuratMController::class, 'detailProduct'])->name('detailProduct');
     Route::post('/dproduct/{id}',[DetailProductController::class, 'addDetail'])->name('adddetail');
     // Surat Masuk
     Route::get('/suratmasuk',[SuratMController::class, 'suratmasuk'])->name('suratmasuk');

@@ -41,6 +41,7 @@
               <form action="{{route('adddetail',$id)}}" class="form form-horizontal" method="post" enctype="multipart/form-data" id="dataFormParticipants">
                   @csrf
                   <div class="row">
+                    <input type="hidden" name="id" id="id" value="{{$id}}">
                     <div class="col-md-6 col-12">
                       <div class="form-group">
                         <label for="first-name-column">ID Product</label>
@@ -66,6 +67,21 @@
                     </div>
                   </div>
                 </form>
+                <table class="table table-striped" id="dataTable">
+                  <thead>
+                      <tr>
+                          <th>No</th>
+                          <th>Kode Product</th>
+                          <th>Nama Product</th>
+                          <th>Jumlah</th>
+                          <th>Satuan</th>
+                          <th>Keterangan</th>
+                      </tr>
+                  </thead>
+                  <tbody>
+
+                  </tbody>
+              </table>
               </div>
             </div>
           </div>
@@ -73,6 +89,97 @@
       </div>
   </section>
   <script>
+    $(document).ready(function() {
+      var id = $('#id').val();
+            var dataTable = $('#dataTable').DataTable({
+                processing: true,
+                serverSide: true,
+                responsive: true,
+                select: true,
+                ajax: "{{url('/dproducts')}}"+'/'+id,
+                columns: [{
+                        data: 'product_id',
+                        name: 'product_id',
+                        render: function(data, type, row, meta) {
+                            return meta.row + meta.settings._iDisplayStart + 1;
+                        }
+                    },
+                    {
+                        data: 'kode_product',
+                        name: 'kode_product',
+                    },
+                    {
+                        data: 'nama_product',
+                        name: 'nama_product',
+                    },
+                    {
+                        data: 'jumlah',
+                        name: 'jumlah',
+                    },
+                    {
+                        data: 'satuan',
+                        name: 'satuan',
+                    },
+                    {
+                        data: 'keterangan',
+                        name: 'keterangan',
+                    },
+                ],
+                lengthMenu: [10, 25, 50],
+                dom: 'Blftrip',
+                buttons: [
+                    {
+                        extend: 'pdf',
+                        text: 'PDF',
+                        exportOptions: {
+                            columns: ':visible',
+                            columnDefs: [{
+                                targets: -1,
+                                visible: false
+                            }]
+                        }
+                    },
+                    {
+                        extend: 'print',
+                        text: 'CETAK',
+                        exportOptions: {
+                            columns: ':visible',
+                            columnDefs: [{
+                                targets: -1,
+                                visible: false
+                            }]
+                        }
+                    },
+                    {
+                        extend: 'excel',
+                        text: 'EXCEL',
+                        exportOptions: {
+                            columns: ':visible',
+                            columnDefs: [{
+                                targets: -1,
+                                visible: false
+                            }]
+                        }
+                    },
+                    {
+                        extend: 'colvis',
+                        text: 'COLUMN VISIBLE',
+                        exportOptions: {
+                            columns: ':visible',
+                            columnDefs: [{
+                                targets: -1,
+                                visible: false
+                            }]
+                        }
+                    }
+                ]
+            })
+
+            function reloadData() {
+                dataTable.ajax.reload();
+            }
+          }
+    );
     document.getElementById('simpan').addEventListener('click',function(){
       Swal.fire({
         title: 'Are you sure?',
