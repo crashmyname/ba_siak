@@ -37,8 +37,8 @@
                                 <th>Tanggal terima</th>
                                 <th>Tanggal Pembuatan</th>
                                 <th>No Po</th>
-                                <th>Nama Product</th>
-                                <th>Nama Supplier</th>
+                                {{-- <th>Nama Product</th>
+                                <th>Nama Supplier</th> --}}
                                 <th>No Invoice</th>
                                 <th>No Faktur</th>
                                 <th>Nominal</th>
@@ -84,14 +84,14 @@
                         data: 'no_po',
                         name: 'no_po',
                     },
-                    {
-                        data: 'nama_product',
-                        name: 'nama_product',
-                    },
-                    {
-                        data: 'nama_supplier',
-                        name: 'nama_supplier',
-                    },
+                    // {
+                    //     data: 'nama_product',
+                    //     name: 'nama_product',
+                    // },
+                    // {
+                    //     data: 'nama_supplier',
+                    //     name: 'nama_supplier',
+                    // },
                     {
                         data: 'no_invoice',
                         name: 'no_invoice',
@@ -101,8 +101,8 @@
                         name: 'no_faktur',
                     },
                     {
-                        data: 'nominal',
-                        name: 'nominal',
+                        data: 'total',
+                        name: 'total',
                     },
                     {
                         data: 'keterangan',
@@ -111,17 +111,7 @@
                 ],
                 lengthMenu: [10, 25, 50],
                 dom: 'Blftrip',
-                buttons: [{
-                        extend: 'copy',
-                        text: 'COPY',
-                        exportOptions: {
-                            columns: ':visible',
-                            columnDefs: [{
-                                targets: -1,
-                                visible: false
-                            }]
-                        }
-                    },
+                buttons: [
                     {
                         extend: 'pdf',
                         text: 'PDF',
@@ -144,17 +134,7 @@
                             }]
                         }
                     },
-                    {
-                        extend: 'csv',
-                        text: 'CSV',
-                        exportOptions: {
-                            columns: ':visible',
-                            columnDefs: [{
-                                targets: -1,
-                                visible: false
-                            }]
-                        }
-                    },
+                    
                     {
                         extend: 'excel',
                         text: 'EXCEL',

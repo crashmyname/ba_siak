@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\SuratMasuk;
 use App\Models\Product;
+use App\Models\DetailProduct;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
@@ -27,9 +28,7 @@ class SuratMController extends Controller
         $title = 'Surat Masuk';
         if($request->ajax())
         {
-            $suratmasuk = SuratMasuk::leftJoin('product','suratmasuk.product_id','=','product.product_id')
-                        ->select('suratmasuk.suratmasuk_id','suratmasuk.no_suratmasuk','suratmasuk.tgl_terima','suratmasuk.tgl_pembuatan','suratmasuk.no_po','product.nama_product','product.nama_supplier','suratmasuk.no_invoice','suratmasuk.no_faktur','suratmasuk.nominal','suratmasuk.keterangan','suratmasuk.berkas')
-                        ->get();
+            $suratmasuk = SuratMasuk::all();
             return DataTables::of($suratmasuk)
             ->make(true);
         }
@@ -44,26 +43,27 @@ class SuratMController extends Controller
             'tgl_terima' => 'required',
             'tgl_pembuatan' => 'required',
             'no_po' => 'required',
-            'product_id' => 'required',
+            // 'product_id' => 'required',
             'no_invoice' => 'required',
             'no_faktur' => 'required',
-            'nominal' => 'required',
+            'ppn' => 'required',
+            'total' => 'required',
             'keterangan' => 'required',
         ]);
-        $ceksupplier = Product::where('product_id',$request->product_id)->first();
-        $result = !$ceksupplier ? '' : $ceksupplier->nama_supplier;
+        // $ceksupplier = Product::where('product_id',$request->product_id)->first();
+        // $result = !$ceksupplier ? '' : $ceksupplier->nama_supplier;
         $suratmasuk = new SuratMasuk();
         $suratmasuk->no_suratmasuk = $request->no_suratmasuk;     
         $suratmasuk->tgl_terima = $request->tgl_terima;     
         $suratmasuk->tgl_pembuatan = $request->tgl_pembuatan;     
         $suratmasuk->no_po = $request->no_po;     
-        $suratmasuk->product_id = $request->product_id;     
-        $suratmasuk->nama_supplier = $result;     
+        // $suratmasuk->product_id = $request->product_id;     
+        // $suratmasuk->nama_supplier = $result;     
         $suratmasuk->no_invoice = $request->no_invoice;     
         $suratmasuk->no_faktur = $request->no_faktur;     
-        $suratmasuk->quantity = $request->quantity;     
-        $suratmasuk->nominal = $request->nominal;     
-        if ($request->hasFile('file')) {
+        $suratmasuk->ppn = $request->ppn;     
+        $suratmasuk->total = $request->total;     
+        if ($request->hasFile('berkas')) {
             $file = $request->file('berkas');
             $oriname = $file->getClientOriginalName();
             $file->storeAs('public/berkas', $oriname);
@@ -83,17 +83,17 @@ class SuratMController extends Controller
     public function updateSuratmasuk(Request $request, $id)
     {
         $suratmasuk = SuratMasuk::find($id);
-        $cek = Product::where('product_id',$request->product_id)->first();
+        // $cek = Product::where('product_id',$request->product_id)->first();
         $suratmasuk->no_suratmasuk = $request->no_suratmasuk;     
         $suratmasuk->tgl_terima = $request->tgl_terima;     
         $suratmasuk->tgl_pembuatan = $request->tgl_pembuatan;     
         $suratmasuk->no_po = $request->no_po;     
-        $suratmasuk->product_id = $request->product_id;     
-        $suratmasuk->nama_supplier = !$cek ? '' : $cek->nama_supplier;     
+        // $suratmasuk->product_id = $request->product_id;     
+        // $suratmasuk->nama_supplier = !$cek ? '' : $cek->nama_supplier;     
         $suratmasuk->no_invoice = $request->no_invoice;     
         $suratmasuk->no_faktur = $request->no_faktur;     
-        $suratmasuk->quantity = $request->quantity;
-        $suratmasuk->nominal = $request->nominal;
+        $suratmasuk->ppn = $request->ppn;
+        $suratmasuk->total = $request->total;
         if($request->hasFile('berkas')){
             $path = 'berkas/'.$suratmasuk->berkas;
             if(Storage::disk('public')->exists($path)){
@@ -124,7 +124,12 @@ class SuratMController extends Controller
     {
         $file = public_path('pdf/suratjalan.pdf');
         $suratmasuk = SuratMasuk::find($id);
-        $product = Product::where('product_id',$suratmasuk->product_id)->first();
+        $dproduct = DetailProduct::select('detailproduct.suratmasuk_id','suratmasuk.no_suratmasuk','suratmasuk.no_faktur','suratmasuk.no_po','suratmasuk.no_invoice','suratmasuk.tgl_terima','suratmasuk.tgl_pembuatan','product.nama_product','suratmasuk.ppn','suratmasuk.keterangan','suratmasuk.total')
+        ->leftJoin('suratmasuk','detailproduct.suratmasuk_id','=','suratmasuk.suratmasuk_id')
+        ->leftJoin('product','detailproduct.product_id','=','product.product_id')
+        ->where('detailproduct.suratmasuk_id',$suratmasuk->suratmasuk_id)
+        ->get();
+        // dd($dproduct);
         $folderpath = public_path('/pdf/suratjalan/'.$id);
         if(!file_exists($folderpath)){
             mkdir($folderpath, 0777, true);
@@ -147,11 +152,27 @@ class SuratMController extends Controller
             $fpdi->Text(160,69.6,$suratmasuk->no_invoice);
             $fpdi->Text(160,76.2,Carbon::parse($suratmasuk->tgl_terima)->format('d-m-Y'));
             $fpdi->Text(160,83,Carbon::parse($suratmasuk->tgl_pembuatan)->format('d-m-Y'));
-            $fpdi->Text(15,118,$product->nama_product);
-            $fpdi->Text(114,118,$suratmasuk->quantity);
+            // Posisi Y awal
+            $startY = 118;
+            $lineHeight = 18; // Tinggi baris untuk setiap data
+            foreach ($dproduct as $key => $value) {
+                // $fpdi->Text(15,118,$value->nama_product);
+                $fpdi->Text(15, $startY + ($key * $lineHeight), $value->nama_product);
+                $fpdi->SetFont('Arial','',10);
+                $fpdi->Text(114, $startY + ($key * $lineHeight), $value->ppn);
+                $fpdi->Text(135, $startY + ($key * $lineHeight), 'Rp. '.$value->total);
+                $fpdi->Text(170, $startY + ($key * $lineHeight), $value->keterangan);
+            }
+            // $fpdi->Text(114,118,$suratmasuk->ppn);
+            // $fpdi->Text(114,137,$suratmasuk->ppn);
+            // $fpdi->Text(114,155,$suratmasuk->ppn);
             // $fpdi->SetFont('Arial','',10);
-            $fpdi->Text(135,118,"Rp.".($suratmasuk->quantity * $suratmasuk->nominal));
-            $fpdi->Text(175,118,$suratmasuk->keterangan);
+            // $fpdi->Text(135,118,"Rp.".($suratmasuk->total));
+            // $fpdi->Text(135,137,"Rp.".($suratmasuk->total));
+            // $fpdi->Text(135,155,"Rp.".($suratmasuk->total));
+            // $fpdi->Text(175,118,$suratmasuk->keterangan);
+            // $fpdi->Text(175,137,$suratmasuk->keterangan);
+            // $fpdi->Text(175,155,$suratmasuk->keterangan);
         }
         return $fpdi->Output($combine, 'I');
     }

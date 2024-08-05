@@ -101,17 +101,7 @@
                 ],
                 lengthMenu: [10, 25, 50],
                 dom: 'Blftrip',
-                buttons: [{
-                        extend: 'copy',
-                        text: 'COPY',
-                        exportOptions: {
-                            columns: ':visible',
-                            columnDefs: [{
-                                targets: -1,
-                                visible: false
-                            }]
-                        }
-                    },
+                buttons: [
                     {
                         extend: 'pdf',
                         text: 'PDF',
@@ -126,17 +116,6 @@
                     {
                         extend: 'print',
                         text: 'CETAK',
-                        exportOptions: {
-                            columns: ':visible',
-                            columnDefs: [{
-                                targets: -1,
-                                visible: false
-                            }]
-                        }
-                    },
-                    {
-                        extend: 'csv',
-                        text: 'CSV',
                         exportOptions: {
                             columns: ':visible',
                             columnDefs: [{

@@ -195,14 +195,14 @@
                 <footer>
                     <div class="footer clearfix mb-0 text-muted">
                         <div class="float-start">
-                            <p>2021 &copy; Mazer</p>
+                            <p>2024 &copy; Mazer</p>
                         </div>
                         <div class="float-end">
                             <p>Crafted with <span class="text-danger"><i class="bi bi-heart-fill icon-mid"></i></span>
-                                by <a href="https://ahmadsaugi.com">Saugi</a> Develop By <a href="mailto:fadliazkaprayogi1@gmail.com&subject=Bikin Aplikasi Bang&body=Dear Bang Fadli, %0A %0A
+                            Develop By <a href="mailto:fadliazkaprayogi1@gmail.com&subject=Bikin Aplikasi Bang&body=Dear Bang Fadli, %0A %0A
           Saya ingin joki aplikasi skripsi bang  %0A %0A
           Mohon Direspon ya bang : %0A %0A
-          Terima kasih %0A">Fadli Azka</a></p>
+          Terima kasih %0A">Dwiyanti Nurjanah</a></p>
                         </div>
                     </div>
                 </footer>

@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\DetailProductController;
 use App\Http\Controllers\SuratMController;
 use App\Http\Controllers\SuratKController;
 
@@ -35,6 +36,9 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/product',[ProductController::class, 'addProduct'])->name('addproduct');
     Route::post('/product/{id}',[ProductController::class, 'updateProduct'])->name('updateproduct');
     Route::delete('/product/{id}',[ProductController::class, 'deleteProduct'])->name('deleteproduct');
+    // Detail Product
+    Route::get('/dproduct/{id}',[DetailProductController::class, 'detailproduct'])->name('dproduct');
+    Route::post('/dproduct/{id}',[DetailProductController::class, 'addDetail'])->name('adddetail');
     // Surat Masuk
     Route::get('/suratmasuk',[SuratMController::class, 'suratmasuk'])->name('suratmasuk');
     Route::post('/suratmasuk',[SuratMController::class, 'addSuratmasuk'])->name('addsuratmasuk');

@@ -79,7 +79,7 @@
                                                                 <div class="col-md-8 form-group">
                                                                     <input type="text" name="no_po" id="no_po" class="form-control">
                                                                 </div>
-                                                                <div class="col-md-4">
+                                                                {{-- <div class="col-md-4">
                                                                     <label>Select Product</label>
                                                                 </div>
                                                                 <div class="col-md-8 form-group">
@@ -89,7 +89,7 @@
                                                                             <option value="{{$item->product_id}}">{{$item->nama_product}}</option>
                                                                         @endforeach
                                                                     </select>
-                                                                </div>
+                                                                </div> --}}
                                                                 <div class="col-md-4">
                                                                     <label>No Invoice</label>
                                                                 </div>
@@ -103,16 +103,16 @@
                                                                     <input type="text" name="no_faktur" id="no_faktur" class="form-control">
                                                                 </div>
                                                                 <div class="col-md-4">
-                                                                    <label>Jumlah</label>
+                                                                    <label>PPN</label>
                                                                 </div>
                                                                 <div class="col-md-8 form-group">
-                                                                    <input type="number" name="quantity" id="quantity" class="form-control">
+                                                                    <input type="text" name="ppn" id="ppn" class="form-control">
                                                                 </div>
                                                                 <div class="col-md-4">
-                                                                    <label>Harga</label>
+                                                                    <label>Total</label>
                                                                 </div>
                                                                 <div class="col-md-8 form-group">
-                                                                    <input type="text" name="nominal" id="nominal" class="form-control">
+                                                                    <input type="text" name="total" id="total" class="form-control">
                                                                 </div>
                                                                 <div class="col-md-4">
                                                                     <label>Upload Berkas PDF</label>
@@ -205,7 +205,7 @@
                                                                 <div class="col-md-8 form-group">
                                                                     <input type="text" name="no_po" id="upno_po" class="form-control">
                                                                 </div>
-                                                                <div class="col-md-4">
+                                                                {{-- <div class="col-md-4">
                                                                     <label>Select Product</label>
                                                                 </div>
                                                                 <div class="col-md-8 form-group">
@@ -215,7 +215,7 @@
                                                                             <option value="{{$item->product_id}}">{{$item->nama_product}}</option>
                                                                         @endforeach
                                                                     </select>
-                                                                </div>
+                                                                </div> --}}
                                                                 <div class="col-md-4">
                                                                     <label>No Invoice</label>
                                                                 </div>
@@ -229,16 +229,16 @@
                                                                     <input type="text" name="no_faktur" id="upno_faktur" class="form-control">
                                                                 </div>
                                                                 <div class="col-md-4">
-                                                                    <label>Jumlah</label>
+                                                                    <label>PPN</label>
                                                                 </div>
                                                                 <div class="col-md-8 form-group">
-                                                                    <input type="number" name="quantity" id="upquantity" class="form-control">
+                                                                    <input type="text" name="ppn" id="upppn" class="form-control">
                                                                 </div>
                                                                 <div class="col-md-4">
-                                                                    <label>Harga</label>
+                                                                    <label>Total</label>
                                                                 </div>
                                                                 <div class="col-md-8 form-group">
-                                                                    <input type="text" name="nominal" id="upnominal" class="form-control">
+                                                                    <input type="text" name="total" id="uptotal" class="form-control">
                                                                 </div>
                                                                 <div class="col-md-4">
                                                                     <label>Berkas</label>
@@ -279,6 +279,7 @@
                     </div>
                     <button type="submit" class="btn btn-outline-danger" id="deletesuratmasuk" title="Delete Surat Masuk"><i class="bi bi-trash"></i>
                     </button>
+                    <a id="addProduct" type="button" title="Add Product" target="_blank" class="btn btn-outline-info"><i class="bi bi-nut-fill"></i></a>
                 </div>
                 <div class="container">
                     <table class="table table-striped" id="dataTable">
@@ -289,11 +290,10 @@
                                 <th>Tanggal terima</th>
                                 <th>Tanggal Pembuatan</th>
                                 <th>No Po</th>
-                                <th>Nama Product</th>
-                                <th>Nama Supplier</th>
                                 <th>No Invoice</th>
                                 <th>No Faktur</th>
-                                <th>Nominal</th>
+                                <th>PPN</th>
+                                <th>Total</th>
                                 <th>Berkas</th>
                                 <th>Keterangan</th>
                             </tr>
@@ -338,14 +338,6 @@
                         name: 'no_po',
                     },
                     {
-                        data: 'nama_product',
-                        name: 'nama_product',
-                    },
-                    {
-                        data: 'nama_supplier',
-                        name: 'nama_supplier',
-                    },
-                    {
                         data: 'no_invoice',
                         name: 'no_invoice',
                     },
@@ -354,8 +346,12 @@
                         name: 'no_faktur',
                     },
                     {
-                        data: 'nominal',
-                        name: 'nominal',
+                        data: 'ppn',
+                        name: 'ppn',
+                    },
+                    {
+                        data: 'total',
+                        name: 'total',
                     },
                     {
                         data: 'berkas',
@@ -368,17 +364,7 @@
                 ],
                 lengthMenu: [10, 25, 50],
                 dom: 'Blftrip',
-                buttons: [{
-                        extend: 'copy',
-                        text: 'COPY',
-                        exportOptions: {
-                            columns: ':visible',
-                            columnDefs: [{
-                                targets: -1,
-                                visible: false
-                            }]
-                        }
-                    },
+                buttons: [
                     {
                         extend: 'pdf',
                         text: 'PDF',
@@ -401,17 +387,7 @@
                             }]
                         }
                     },
-                    {
-                        extend: 'csv',
-                        text: 'CSV',
-                        exportOptions: {
-                            columns: ':visible',
-                            columnDefs: [{
-                                targets: -1,
-                                visible: false
-                            }]
-                        }
-                    },
+
                     {
                         extend: 'excel',
                         text: 'EXCEL',
@@ -491,12 +467,12 @@
                 var tgl_terima = $('#uptgl_terima');
                 var tgl_pembuatan = $('#uptgl_pembuatan');
                 var no_po = $('#upno_po');
-                var product_id = $('#upproduct_id');
-                var nama_supplier = $('#upnama_supplier');
+                // var product_id = $('#upproduct_id');
+                // var nama_supplier = $('#upnama_supplier');
                 var no_invoice = $('#upno_invoice');
                 var no_faktur = $('#upno_faktur');
-                var quantity = $('#upquantity');
-                var nominal = $('#upnominal');
+                var ppn = $('#upppn');
+                var total = $('#uptotal');
                 var berkas = $('#pdfViewer');
                 var keterangan = $('#upketerangan');
                 if (selected.length > 0) {
@@ -504,12 +480,12 @@
                     tgl_terima.val(selected[0].tgl_terima);
                     tgl_pembuatan.val(selected[0].tgl_pembuatan);
                     no_po.val(selected[0].no_po);
-                    product_id.val(selected[0].product_id);
-                    nama_supplier.val(selected[0].nama_supplier);
+                    // product_id.val(selected[0].product_id);
+                    // nama_supplier.val(selected[0].nama_supplier);
                     no_invoice.val(selected[0].no_invoice);
                     no_faktur.val(selected[0].no_faktur);
-                    quantity.val(selected[0].quantity);
-                    nominal.val(selected[0].nominal);
+                    ppn.val(selected[0].ppn);
+                    total.val(selected[0].total);
                     berkas.attr('src','storage/berkas/'+selected[0].berkas);
                     keterangan.val(selected[0].keterangan);
                     $('#modalwarning').modal('show');
@@ -603,6 +579,31 @@
                     }
                 })
             })
+            $('#addProduct').on('click', function(){
+                var selectData = dataTable.rows({ selected: true}).data();
+                if (selectData.length > 0) {
+                        selectData.each(function (data) {
+                            const idSuratmasuk = data.suratmasuk_id;
+                            var url = "{{url('/dproduct')}}"+"/"+idSuratmasuk;
+                            window.open(url, '_blank');
+                            var link = $('<a>', {
+                                href: url,
+                                text: 'Go to Add Product',
+                                class: 'btn btn-primary',
+                                target: '_blank',
+                            });
+
+                            // Tambahkan tombol ke dokumen
+                            $('#buttonContainer').append(link);
+                        });
+                } else {
+                    Swal.fire({
+                        icon: 'info',
+                        title: 'Info',
+                        text: 'No data selected.',
+                    });
+                };
+            });
             $('#deletesuratmasuk').on('click', function(e) {
                 var select = dataTable.rows({
                     selected: true
