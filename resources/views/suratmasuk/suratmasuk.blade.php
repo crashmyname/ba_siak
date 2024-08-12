@@ -353,7 +353,8 @@
                         data: 'total',
                         name: 'total',
                         render: function(data,type,row){
-                            return 'Rp. '+row.total;
+                            var number = parseFloat(data).toFixed(2);
+                            return 'Rp. ' + number.replace(/\B(?=(\d{3})+(?!\d))/g, '.');
                         },
                     },
                     {
