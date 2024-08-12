@@ -352,6 +352,9 @@
                     {
                         data: 'total',
                         name: 'total',
+                        render: function(data,type,row){
+                            return 'Rp. '+row.total;
+                        },
                     },
                     {
                         data: 'berkas',
