@@ -218,7 +218,7 @@
                                 <th>Kode Product</th>
                                 <th>Nama Product</th>
                                 <th>Jumlah</th>
-                                <th>Satuan</th>
+                                <th width="20%">Satuan</th>
                                 <th>Keterangan</th>
                             </tr>
                         </thead>

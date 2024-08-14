@@ -244,7 +244,7 @@
                                 <th>No Po</th>
                                 <th>No Invoice</th>
                                 <th>No Faktur</th>
-                                <th>Nominal</th>
+                                <th width="20%">Nominal</th>
                                 <th>Keterangan</th>
                             </tr>
                         </thead>
@@ -298,6 +298,10 @@
                     {
                         data: 'nominal',
                         name: 'nominal',
+                        render: function(data,type,row){
+                            var number = parseFloat(data).toFixed(2);
+                            return 'Rp ' + number.replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+                        }
                     },
                     {
                         data: 'keterangan',
