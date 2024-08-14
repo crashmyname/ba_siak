@@ -292,8 +292,8 @@
                                 <th>No Po</th>
                                 <th>No Invoice</th>
                                 <th>No Faktur</th>
-                                <th width="15%">PPN</th>
-                                <th width="15%">Total</th>
+                                <th width="20%">PPN</th>
+                                <th width="20%">Total</th>
                                 <th>Berkas</th>
                                 <th>Keterangan</th>
                             </tr>
