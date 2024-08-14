@@ -93,7 +93,7 @@ class SuratKController extends Controller
         return view('suratkeluar.reportsuratkeluar');
     }
 
-    public function pdfSuratKeluar(Request $request, $id)
+    public function pdfSuratKeluar(Request $request, $id,$tanggal)
     {
         $file = public_path('pdf/suratkeluar.pdf');
         $suratkeluar = SuratKeluar::find($id);
@@ -123,6 +123,7 @@ class SuratKController extends Controller
             // $fpdi->Text(15,118,$product->nama_product);
             // $fpdi->Text(139,118,$suratkeluar->nominal);
             // $fpdi->Text(175,118,$suratkeluar->keterangan);
+            $fpdi->Text(15,205,"Tanggal, ".Carbon::parse($tanggal)->format('d-m-Y'));
         }
         return $fpdi->Output($combine, 'I');
     }
