@@ -103,6 +103,10 @@
                     {
                         data: 'total',
                         name: 'total',
+                        render: function(data, type, row){
+                            var number = parseFloat(data).toFixed(2);
+                            return 'Rp ' + number.replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+                        }
                     },
                     {
                         data: 'keterangan',

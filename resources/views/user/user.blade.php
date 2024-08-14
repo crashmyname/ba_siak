@@ -278,28 +278,6 @@
                 dom: 'Blftrip',
                 buttons: [
                     {
-                        extend: 'pdf',
-                        text: 'PDF',
-                        exportOptions: {
-                            columns: ':visible',
-                            columnDefs: [{
-                                targets: -1,
-                                visible: false
-                            }]
-                        }
-                    },
-                    {
-                        extend: 'print',
-                        text: 'CETAK',
-                        exportOptions: {
-                            columns: ':visible',
-                            columnDefs: [{
-                                targets: -1,
-                                visible: false
-                            }]
-                        }
-                    },
-                    {
                         extend: 'excel',
                         text: 'EXCEL',
                         exportOptions: {

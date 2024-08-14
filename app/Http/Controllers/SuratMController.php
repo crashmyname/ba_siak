@@ -172,9 +172,10 @@ class SuratMController extends Controller
                 $fpdi->Text(15, $startY + ($key * $lineHeight), $value->nama_product);
                 $fpdi->SetFont('Arial','',10);
                 $fpdi->Text(114, $startY + ($key * $lineHeight), $value->ppn);
-                $fpdi->Text(135, $startY + ($key * $lineHeight), 'Rp. '.$value->total);
+                $fpdi->Text(135, $startY + ($key * $lineHeight), 'Rp ' . number_format($value->total, 2, ',', '.'));
                 $fpdi->Text(170, $startY + ($key * $lineHeight), $value->keterangan);
             }
+            $fpdi->Text(15,205,"Tanggal, ".Carbon::now()->format('d-m-Y'));
             // $fpdi->Text(114,118,$suratmasuk->ppn);
             // $fpdi->Text(114,137,$suratmasuk->ppn);
             // $fpdi->Text(114,155,$suratmasuk->ppn);
