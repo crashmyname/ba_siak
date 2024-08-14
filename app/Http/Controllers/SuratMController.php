@@ -132,7 +132,7 @@ class SuratMController extends Controller
         }
     }
 
-    public function pdfSuratMasuk(Request $request, $id)
+    public function pdfSuratMasuk(Request $request, $id,$tanggal)
     {
         $file = public_path('pdf/suratjalan.pdf');
         $suratmasuk = SuratMasuk::find($id);
@@ -176,7 +176,8 @@ class SuratMController extends Controller
                 $fpdi->Text(134.5, $startY + ($key * $lineHeight), 'Rp ' . number_format($value->total, 2, ',', '.'));
                 $fpdi->Text(170, $startY + ($key * $lineHeight), $value->keterangan);
             }
-            $fpdi->Text(15,205,"Tanggal, ".Carbon::now()->format('d-m-Y'));
+            $fpdi->setFont('Arial','',10);
+            $fpdi->Text(15,205,"Tanggal, ".Carbon::parse($tanggal)->format('d-m-Y'));
             // $fpdi->Text(114,118,$suratmasuk->ppn);
             // $fpdi->Text(114,137,$suratmasuk->ppn);
             // $fpdi->Text(114,155,$suratmasuk->ppn);

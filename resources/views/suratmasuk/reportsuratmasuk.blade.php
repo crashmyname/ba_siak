@@ -25,6 +25,7 @@
                     <h4 class="card-title">Report Surat Masuk Content</h4>
                 </div>
                 <div class="card-body">
+                    Tanggal : <input type="date" id="date" class="form-control">
                     <button type="submit" class="btn btn-outline-danger" id="reportpdf" title="Report PDF"><i class="bi bi-filetype-pdf"></i>
                     </button>
                 </div>
@@ -172,7 +173,8 @@
             if (selectData.length > 0) {
                     selectData.each(function (data) {
                         const iD = data.suratmasuk_id;
-                        var url = "{{url('/reportsuratmasuk')}}"+"/"+iD;
+                        const tanggal = $('#date').val();
+                        var url = "{{url('/reportsuratmasuk')}}"+"/"+iD+'/'+tanggal;
                         window.open(url, '_blank');
                         // window.location.href="{{url('/viewparticipants')}}"+"/"+idSchedule;
                         var link = $('<a>', {

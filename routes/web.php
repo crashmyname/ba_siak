@@ -46,7 +46,7 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/suratmasuk/{id}',[SuratMController::class, 'updateSuratmasuk'])->name('updatesuratmasuk');
     Route::delete('/suratmasuk/{id}',[SuratMController::class, 'deleteSuratmasuk'])->name('deletesuratmasuk');
     Route::get('/reportsuratmasuk',[SuratMController::class, 'reportSuratMasuk'])->name('reportsuratmasuk');
-    Route::get('/reportsuratmasuk/{id}',[SuratMController::class, 'pdfSuratMasuk'])->name('pdfsuratmasuk');
+    Route::get('/reportsuratmasuk/{id}/{tanggal}',[SuratMController::class, 'pdfSuratMasuk'])->name('pdfsuratmasuk');
     // Surat Keluar
     Route::get('/suratkeluar',[SuratKController::class, 'suratkeluar'])->name('suratkeluar');
     Route::post('/suratkeluar',[SuratKController::class, 'addSuratkeluar'])->name('addsuratkeluar');
