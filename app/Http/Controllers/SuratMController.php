@@ -169,8 +169,8 @@ class SuratMController extends Controller
             $lineHeight = 18; // Tinggi baris untuk setiap data
             foreach ($dproduct as $key => $value) {
                 // $fpdi->Text(15,118,$value->nama_product);
-                $fpdi->Text(15, $startY + ($key * $lineHeight), $value->nama_product);
                 $fpdi->SetFont('Arial','',10);
+                $fpdi->Text(15, $startY + ($key * $lineHeight), $value->nama_product);
                 $fpdi->Text(114, $startY + ($key * $lineHeight), $value->ppn);
                 $fpdi->SetFont('Arial','',8);
                 $fpdi->Text(134.5, $startY + ($key * $lineHeight), 'Rp ' . number_format($value->total, 2, ',', '.'));
