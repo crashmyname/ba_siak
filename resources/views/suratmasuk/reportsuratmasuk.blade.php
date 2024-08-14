@@ -42,7 +42,7 @@
                                 <th>Nama Supplier</th> --}}
                                 <th>No Invoice</th>
                                 <th>No Faktur</th>
-                                <th>Nominal</th>
+                                <th width="20%">Nominal</th>
                                 <th>Keterangan</th>
                             </tr>
                         </thead>
